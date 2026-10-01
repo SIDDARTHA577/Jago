@@ -189,7 +189,7 @@ export const VerifierDetail: React.FC<VerifierDetailProps> = ({ user }) => {
               <Award className="w-4 h-4 text-indigo-600 shrink-0" />
               <div>
                 <span className="text-slate-500 block text-[10px] uppercase font-semibold">Driving License (DL)</span>
-                <strong className="font-mono text-slate-900 font-bold">{app.pilot?.license_number || 'AP39 20240012345'}</strong>
+                <strong className="font-mono text-slate-900 font-bold">{app.pilot?.license_number || 'Not Provided'}</strong>
               </div>
             </div>
 
@@ -197,7 +197,7 @@ export const VerifierDetail: React.FC<VerifierDetailProps> = ({ user }) => {
               <Car className="w-4 h-4 text-indigo-600 shrink-0" />
               <div>
                 <span className="text-slate-500 block text-[10px] uppercase font-semibold">Vehicle Plate No.</span>
-                <strong className="font-mono text-slate-900 font-bold">{app.pilot?.vehicle_number || 'AP 39 TV 4589'}</strong>
+                <strong className="font-mono text-slate-900 font-bold">{app.pilot?.vehicle_number || 'Not Provided'}</strong>
               </div>
             </div>
           </div>

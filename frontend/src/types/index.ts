@@ -30,6 +30,7 @@ export interface Profile {
   address?: string;
   state?: string;
   pincode?: string;
+  password_hash?: string;
   status: 'active' | 'inactive' | 'suspended';
   created_at: string;
   updated_at: string;

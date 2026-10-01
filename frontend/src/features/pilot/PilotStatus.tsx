@@ -70,7 +70,7 @@ export const PilotStatus: React.FC<PilotStatusProps> = ({ user }) => {
               <div className="text-right">
                 <p className="text-xs text-slate-500 font-mono">DL & Plate Number</p>
                 <p className="text-sm font-semibold text-slate-900 font-mono">
-                  {user.license_number || 'AP39 20240012345'} • {user.vehicle_number || 'AP 39 TV 4589'}
+                  {user.license_number || 'Not Provided'} • {user.vehicle_number || 'Not Provided'}
                 </p>
               </div>
             </div>

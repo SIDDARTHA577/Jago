@@ -28,7 +28,22 @@ function AppContent() {
         setUser(profile);
       })
       .finally(() => setLoading(false));
-  }, []);
+
+    // Periodic 5-second session check to enforce 15-minute expiration limit
+    const interval = setInterval(() => {
+      if (!authService.isSessionValid()) {
+        setUser(prev => {
+          if (prev) {
+            authService.logout();
+            navigate('/login');
+          }
+          return null;
+        });
+      }
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [navigate]);
 
   const handleLoginSuccess = (loggedInUser: Profile) => {
     setUser(loggedInUser);

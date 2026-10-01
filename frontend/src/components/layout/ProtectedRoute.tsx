@@ -1,6 +1,7 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
 import { Profile, UserRole } from '../../types';
+import { authService } from '../../services/authService';
 
 export interface ProtectedRouteProps {
   user: Profile | null;
@@ -9,7 +10,7 @@ export interface ProtectedRouteProps {
 }
 
 export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ user, allowedRoles, children }) => {
-  if (!user) {
+  if (!user || !authService.isSessionValid()) {
     return <Navigate to="/login" replace />;
   }
 

@@ -115,7 +115,7 @@ export const VerifierApplications: React.FC<VerifierApplicationsProps> = ({ user
                     <td className="p-4 font-mono font-bold text-slate-900">
                       <span className="inline-flex items-center gap-1.5 bg-slate-100 px-2 py-0.5 rounded border border-slate-200">
                         <Car className="w-3 h-3 text-indigo-600" />
-                        {app.pilot?.vehicle_number || 'AP 39 TV 4589'}
+                        {app.pilot?.vehicle_number || 'Not Provided'}
                       </span>
                     </td>
                     <td className="p-4">

@@ -59,7 +59,7 @@ export const ApprovalModal: React.FC<ApprovalModalProps> = ({
         <div className="text-xs text-slate-600 space-y-1 bg-slate-50 p-3 rounded-lg border border-slate-200">
           <p>• Driver Name: <strong className="text-slate-900 font-semibold">{application.pilot?.name}</strong></p>
           <p>• DL Number: <strong className="text-slate-900 font-semibold">{application.pilot?.license_number || 'N/A'}</strong></p>
-          <p>• Vehicle Plate Number: <strong className="text-slate-900 font-semibold">{application.pilot?.vehicle_number || 'AP 39 TV 4589'}</strong></p>
+          <p>• Vehicle Plate Number: <strong className="text-slate-900 font-semibold">{application.pilot?.vehicle_number || 'N/A'}</strong></p>
           <p>• Verification Status: <strong className="text-emerald-700 font-bold">All Mandatory Documents Verified</strong></p>
         </div>
 

@@ -59,8 +59,8 @@ export const AdminUsers: React.FC = () => {
                   <td className="p-4 text-slate-700 font-mono">
                     {u.role_key === 'pilot' ? (
                       <div>
-                        <div className="font-bold text-indigo-700">{u.vehicle_number || 'AP 39 TV 4589'}</div>
-                        <div className="text-[10px] text-slate-500 font-sans">DL: {u.license_number || 'AP39 20240012345'}</div>
+                        <div className="font-bold text-indigo-700">{u.vehicle_number || 'Not Provided'}</div>
+                        <div className="text-[10px] text-slate-500 font-sans">DL: {u.license_number || 'Not Provided'}</div>
                       </div>
                     ) : (
                       <span className="text-slate-400 italic">N/A (Staff)</span>

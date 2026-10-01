@@ -139,8 +139,8 @@ export const exportPilotPermissionCertificate = (app: any, user: any) => {
     ['Driver Applicant Name:', String(user.name || 'Driver Applicant')],
     ['Email Address:', String(user.email || 'N/A')],
     ['Contact Phone:', String(user.phone || 'N/A')],
-    ['Driving License (DL) No.:', String(user.license_number || 'AP39 20240012345')],
-    ['Vehicle Registration Plate:', String(user.vehicle_number || 'AP 39 TV 4589')],
+    ['Driving License (DL) No.:', String(user.license_number || 'Not Provided')],
+    ['Vehicle Registration Plate:', String(user.vehicle_number || 'Not Provided')],
     ['Vehicle Category:', String(user.vehicle_type || 'Passenger Vehicle / Auto Rickshaw')],
     ['Registered Address:', String(user.address || 'Andhra Pradesh, India')]
   ];

@@ -8,10 +8,11 @@ export const INITIAL_PROFILES: Profile[] = [
     name: 'K. Rajesh Varma',
     email: 'pilot@jago.com',
     phone: '+91 94401 23456',
-    license_number: 'AP39 20240012345',
-    vehicle_number: 'AP 39 TV 4589',
+    license_number: '',
+    vehicle_number: '',
     vehicle_type: 'Auto Rickshaw (Passenger Vehicle)',
     address: 'Door No. 12-4-15, MG Road, Vijayawada, Andhra Pradesh 520010',
+    password_hash: '41b28fabae303b62334f5fc12bd0d0afaefd038f24e897b41ff03659be659a2d',
     status: 'active',
     created_at: new Date(Date.now() - 7 * 86400000).toISOString(),
     updated_at: new Date().toISOString(),
@@ -24,6 +25,7 @@ export const INITIAL_PROFILES: Profile[] = [
     email: 'verifier@jago.com',
     phone: '+91 98492 87654',
     address: 'AP Secretariat H-Block, Amaravati, Andhra Pradesh 522237',
+    password_hash: '8c49dc528463459b373a33f2feee638d87cf5372394267483b934f003316ef6a',
     status: 'active',
     created_at: new Date(Date.now() - 14 * 86400000).toISOString(),
     updated_at: new Date().toISOString(),
@@ -36,6 +38,7 @@ export const INITIAL_PROFILES: Profile[] = [
     email: 'admin@jago.com',
     phone: '+91 94900 11223',
     address: 'IT Tower, Hill No. 3, Rushikonda, Visakhapatnam, Andhra Pradesh 530045',
+    password_hash: 'cc9f4d092fdb02f8345a1d3e5b8a55427d8c1bd419af4603291c90ec20b913ee',
     status: 'active',
     created_at: new Date(Date.now() - 30 * 86400000).toISOString(),
     updated_at: new Date().toISOString(),
@@ -374,9 +377,13 @@ class MockStore {
     email: string;
     phone: string;
     password?: string;
+    password_hash?: string;
     address: string;
     state: string;
     pincode: string;
+    license_number?: string;
+    vehicle_number?: string;
+    vehicle_type?: string;
     role_key?: UserRole;
   }): Profile {
     const existing = this.profiles.find(p => p.email.toLowerCase() === data.email.toLowerCase());
@@ -392,9 +399,13 @@ class MockStore {
       name: data.name,
       email: data.email,
       phone: data.phone,
+      license_number: data.license_number || '',
+      vehicle_number: data.vehicle_number || '',
+      vehicle_type: data.vehicle_type || 'Auto Rickshaw (Passenger Vehicle)',
       address: `${data.address}, ${data.state} - ${data.pincode}`,
       state: data.state,
       pincode: data.pincode,
+      password_hash: data.password_hash,
       status: 'active',
       created_at: new Date().toISOString(),
       updated_at: new Date().toISOString()
@@ -411,7 +422,9 @@ class MockStore {
       email: data.email,
       phone: data.phone,
       state: data.state,
-      pincode: data.pincode
+      pincode: data.pincode,
+      license_number: data.license_number,
+      vehicle_number: data.vehicle_number
     });
 
     this.saveToStorage();

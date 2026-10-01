@@ -72,12 +72,12 @@ export const PilotProfile: React.FC<PilotProfileProps> = ({ user, onProfileUpdat
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <Input label="Mobile / Phone Number" value={phone} onChange={e => setPhone(e.target.value)} placeholder="+91 94401 23456" />
-              <Input label="Driving License (DL) Number" value={licenseNumber} onChange={e => setLicenseNumber(e.target.value)} placeholder="AP39 20240012345" />
+              <Input label="Mobile / Phone Number" value={phone} onChange={e => setPhone(e.target.value)} placeholder="e.g. +91 94401 23456" />
+              <Input label="Driving License (DL) Number" value={licenseNumber} onChange={e => setLicenseNumber(e.target.value)} placeholder="e.g. AP39 20240001122" />
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <Input label="Vehicle Registration Number (Plate No.)" value={vehicleNumber} onChange={e => setVehicleNumber(e.target.value)} placeholder="AP 39 TV 4589" />
+              <Input label="Vehicle Registration Number (Plate No.)" value={vehicleNumber} onChange={e => setVehicleNumber(e.target.value)} placeholder="e.g. AP 39 TV 9988" />
               <Input label="Vehicle Category / Type" value={vehicleType} onChange={e => setVehicleType(e.target.value)} placeholder="Auto Rickshaw / Passenger Car / Bike" />
             </div>
 

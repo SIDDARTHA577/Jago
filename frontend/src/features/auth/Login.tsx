@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Shield, Lock, Mail, ArrowRight, AlertCircle, User, Phone, MapPin, Hash, UserCheck, CheckCircle2, Eye, EyeOff } from 'lucide-react';
+import { Shield, Lock, Mail, ArrowRight, AlertCircle, User, Phone, MapPin, Hash, UserCheck, CheckCircle2, Eye, EyeOff, CreditCard, Car } from 'lucide-react';
 import { authService } from '../../services/authService';
 import { Profile } from '../../types';
 import { Button } from '../../components/ui/Button';
@@ -56,11 +56,11 @@ function calculatePasswordStrength(pass: string): PasswordStrength {
 export const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
   const [authMode, setAuthMode] = useState<'login' | 'register'>('login');
 
-  // Login Form States
-  const [loginEmail, setLoginEmail] = useState('pilot@jago.com');
-  const [loginPassword, setLoginPassword] = useState('password123');
+  // Login Form States (Empty by default for production security)
+  const [loginEmail, setLoginEmail] = useState('');
+  const [loginPassword, setLoginPassword] = useState('');
 
-  // Register Form States (Collecting Name, Email, Mobile Number, Password, Confirm Password, Address, State, Pincode)
+  // Register Form States (Collecting Name, Email, Mobile Number, Password, Confirm Password, Address, State, Pincode, DL, Vehicle Plate)
   const [regName, setRegName] = useState('');
   const [regEmail, setRegEmail] = useState('');
   const [regPhone, setRegPhone] = useState('');
@@ -69,6 +69,9 @@ export const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
   const [regAddress, setRegAddress] = useState('');
   const [regState, setRegState] = useState('Andhra Pradesh');
   const [regPincode, setRegPincode] = useState('');
+  const [regLicenseNumber, setRegLicenseNumber] = useState('');
+  const [regVehicleNumber, setRegVehicleNumber] = useState('');
+  const [regVehicleType, setRegVehicleType] = useState('Auto Rickshaw (Passenger Vehicle)');
 
   const [showPassword, setShowPassword] = useState(false);
 
@@ -127,6 +130,14 @@ export const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
       setError('Please enter a valid 6-digit pincode.');
       return;
     }
+    if (!regLicenseNumber.trim()) {
+      setError('Please enter your Driving License (DL) Number.');
+      return;
+    }
+    if (!regVehicleNumber.trim()) {
+      setError('Please enter your Vehicle Registration Plate Number.');
+      return;
+    }
 
     setLoading(true);
 
@@ -140,6 +151,9 @@ export const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
         address: regAddress.trim(),
         state: regState,
         pincode: regPincode.trim(),
+        license_number: regLicenseNumber.trim().toUpperCase(),
+        vehicle_number: regVehicleNumber.trim().toUpperCase(),
+        vehicle_type: regVehicleType,
         role_key: 'pilot'
       });
 
@@ -438,6 +452,67 @@ export const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
                       className="w-full pl-10 pr-3.5 py-2.5 bg-white border border-slate-300 rounded-xl text-slate-900 placeholder-slate-400 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-sm font-mono"
                       placeholder="520010"
                     />
+                  </div>
+                </div>
+              </div>
+
+              {/* Driver & Vehicle Identification Section */}
+              <div className="pt-2 border-t border-slate-200">
+                <p className="text-[11px] font-bold uppercase tracking-wider text-indigo-700 mb-2">
+                  Driver & Vehicle Identification
+                </p>
+                <div className="space-y-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
+                        Driving License (DL)
+                      </label>
+                      <div className="relative">
+                        <CreditCard className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5" />
+                        <input
+                          type="text"
+                          required
+                          value={regLicenseNumber}
+                          onChange={e => setRegLicenseNumber(e.target.value)}
+                          className="w-full pl-10 pr-3.5 py-2.5 bg-white border border-slate-300 rounded-xl text-slate-900 placeholder-slate-400 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-sm font-mono uppercase"
+                          placeholder="e.g. AP39 20240001122"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
+                        Vehicle Plate Number
+                      </label>
+                      <div className="relative">
+                        <Car className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5" />
+                        <input
+                          type="text"
+                          required
+                          value={regVehicleNumber}
+                          onChange={e => setRegVehicleNumber(e.target.value)}
+                          className="w-full pl-10 pr-3.5 py-2.5 bg-white border border-slate-300 rounded-xl text-slate-900 placeholder-slate-400 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-sm font-mono uppercase"
+                          placeholder="e.g. AP 39 TV 9988"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
+                      Vehicle Category / Type
+                    </label>
+                    <select
+                      value={regVehicleType}
+                      onChange={e => setRegVehicleType(e.target.value)}
+                      className="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-xl text-slate-900 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-sm font-medium"
+                    >
+                      <option value="Auto Rickshaw (Passenger Vehicle)">Auto Rickshaw (Passenger Vehicle)</option>
+                      <option value="Cab / Sedan (Passenger Taxi)">Cab / Sedan (Passenger Taxi)</option>
+                      <option value="Electric Auto / EV Passenger">Electric Auto / EV Passenger</option>
+                      <option value="Commercial Goods Vehicle (Light)">Commercial Goods Vehicle (Light)</option>
+                      <option value="Two Wheeler / Delivery Bike">Two Wheeler / Delivery Bike</option>
+                    </select>
                   </div>
                 </div>
               </div>

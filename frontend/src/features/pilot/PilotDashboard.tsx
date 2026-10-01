@@ -115,12 +115,12 @@ export const PilotDashboard: React.FC<PilotDashboardProps> = ({ user }) => {
             <div className="flex items-center gap-3 pt-1">
               <div className="flex items-center gap-1.5 text-xs text-slate-700 font-bold">
                 <IdCard className="w-4 h-4 text-indigo-600" />
-                <span>DL: <strong className="font-mono text-slate-900">{user.license_number || 'AP39 20240012345'}</strong></span>
+                <span>DL: <strong className="font-mono text-slate-900">{user.license_number || 'Not Provided'}</strong></span>
               </div>
               <span className="text-slate-300">•</span>
               <div className="flex items-center gap-1.5 text-xs text-slate-700 font-bold">
                 <Car className="w-4 h-4 text-indigo-600" />
-                <span>Plate: <strong className="font-mono text-slate-900">{user.vehicle_number || 'AP 39 TV 4589'}</strong></span>
+                <span>Plate: <strong className="font-mono text-slate-900">{user.vehicle_number || 'Not Provided'}</strong></span>
               </div>
             </div>
             <p className="text-[11px] text-slate-500">{user.vehicle_type || 'Auto Rickshaw / Passenger Vehicle'}</p>
