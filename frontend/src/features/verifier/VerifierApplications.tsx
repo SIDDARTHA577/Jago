@@ -77,7 +77,7 @@ export const VerifierApplications: React.FC<VerifierApplicationsProps> = ({ user
 
       <Card className="bg-white border-slate-200 shadow-sm">
         <CardContent className="p-0 overflow-x-auto">
-          <table className="w-full text-left border-collapse">
+          <table className="w-full text-left border-collapse min-w-[650px]">
             <thead>
               <tr className="border-b border-slate-200 bg-slate-50/80 text-[11px] font-bold text-slate-600 uppercase tracking-wider">
                 <th className="p-4">Reference</th>

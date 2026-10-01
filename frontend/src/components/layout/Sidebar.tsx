@@ -20,9 +20,11 @@ import { UserRole } from '../../types';
 
 export interface SidebarProps {
   role: UserRole;
+  isOpenOnMobile?: boolean;
+  onCloseMobile?: () => void;
 }
 
-export const Sidebar: React.FC<SidebarProps> = ({ role }) => {
+export const Sidebar: React.FC<SidebarProps> = ({ role, isOpenOnMobile, onCloseMobile }) => {
   const linkClass = ({ isActive }: { isActive: boolean }) =>
     `flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-all ${
       isActive
@@ -30,9 +32,9 @@ export const Sidebar: React.FC<SidebarProps> = ({ role }) => {
         : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
     }`;
 
-  return (
-    <aside className="w-64 bg-white border-r border-slate-200 flex flex-col justify-between shrink-0 sticky top-16 h-[calc(100vh-4rem)] p-4 shadow-sm overflow-y-auto z-30">
-      <div className="space-y-6">
+  const content = (
+    <aside className="w-64 bg-white border-r border-slate-200 flex flex-col justify-between shrink-0 h-full p-4 shadow-sm overflow-y-auto">
+      <div className="space-y-6" onClick={() => onCloseMobile?.()}>
         {role === 'pilot' && (
           <nav className="space-y-1">
             <div className="px-3 pb-2 text-[10px] uppercase font-bold text-slate-400 tracking-wider font-mono">
@@ -143,6 +145,28 @@ export const Sidebar: React.FC<SidebarProps> = ({ role }) => {
         </div>
       </div>
     </aside>
+  );
+
+  return (
+    <>
+      {/* Desktop Persistent Sidebar */}
+      <div className="hidden md:block sticky top-16 h-[calc(100vh-4rem)] z-30">
+        {content}
+      </div>
+
+      {/* Mobile Drawer Overlay */}
+      {isOpenOnMobile && (
+        <div className="fixed inset-0 z-50 md:hidden flex">
+          <div
+            className="fixed inset-0 bg-slate-900/40 backdrop-blur-xs transition-opacity"
+            onClick={onCloseMobile}
+          />
+          <div className="relative z-50 w-64 max-w-[85vw] bg-white h-full shadow-2xl animate-in slide-in-from-left duration-200">
+            {content}
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

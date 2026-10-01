@@ -15,6 +15,7 @@ export interface AppShellProps {
 
 export const AppShell: React.FC<AppShellProps> = ({ user, onLogout, children }) => {
   const [notifOpen, setNotifOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [, forceUpdate] = useState({});
 
   const notifications = user ? mockStore.getNotifications(user.id) : [];
@@ -34,11 +35,19 @@ export const AppShell: React.FC<AppShellProps> = ({ user, onLogout, children }) 
         onLogout={onLogout}
         unreadNotificationCount={unreadCount}
         onOpenNotifications={() => setNotifOpen(true)}
+        onToggleMobileMenu={() => setMobileMenuOpen(!mobileMenuOpen)}
+        isMobileMenuOpen={mobileMenuOpen}
       />
 
       <div className="flex flex-1">
-        {user && <Sidebar role={user.role_key} />}
-        <main className="flex-1 p-6 md:p-8 max-w-7xl mx-auto w-full overflow-x-hidden">
+        {user && (
+          <Sidebar
+            role={user.role_key}
+            isOpenOnMobile={mobileMenuOpen}
+            onCloseMobile={() => setMobileMenuOpen(false)}
+          />
+        )}
+        <main className="flex-1 p-4 sm:p-6 md:p-8 max-w-7xl mx-auto w-full overflow-x-hidden">
           {children}
         </main>
       </div>

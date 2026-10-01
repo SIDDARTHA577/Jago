@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Shield, Bell, LogOut } from 'lucide-react';
+import { Shield, Bell, LogOut, Menu, X } from 'lucide-react';
 import { Profile } from '../../types';
 
 export interface HeaderProps {
@@ -7,30 +7,43 @@ export interface HeaderProps {
   onLogout: () => void;
   unreadNotificationCount: number;
   onOpenNotifications: () => void;
+  onToggleMobileMenu?: () => void;
+  isMobileMenuOpen?: boolean;
 }
 
 export const Header: React.FC<HeaderProps> = ({
   user,
   onLogout,
   unreadNotificationCount,
-  onOpenNotifications
+  onOpenNotifications,
+  onToggleMobileMenu,
+  isMobileMenuOpen
 }) => {
   const [userMenuOpen, setUserMenuOpen] = useState(false);
 
   return (
     <header className="sticky top-0 z-40 w-full h-16 bg-white/90 backdrop-blur-md border-b border-slate-200 px-4 md:px-6 flex items-center justify-between shadow-sm">
       <div className="flex items-center gap-3">
+        {user && onToggleMobileMenu && (
+          <button
+            onClick={onToggleMobileMenu}
+            className="md:hidden p-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors"
+            title="Toggle Navigation Menu"
+          >
+            {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
+        )}
         <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-sky-500 to-indigo-600 flex items-center justify-center shadow-md shadow-sky-500/10 ring-1 ring-white/50">
           <Shield className="w-6 h-6 text-white stroke-[2.5]" />
         </div>
         <div>
           <div className="flex items-center gap-2">
             <span className="text-lg font-black tracking-wider text-slate-900 font-mono">JAGO</span>
-            <span className="text-xs px-2 py-0.5 rounded bg-sky-100 text-sky-800 font-bold border border-sky-200">
+            <span className="text-xs px-2 py-0.5 rounded bg-sky-100 text-sky-800 font-bold border border-sky-200 hidden sm:inline-block">
               PILOT PLATFORM
             </span>
           </div>
-          <p className="text-[10px] text-slate-500 font-medium">Verification & Permission Portal</p>
+          <p className="text-[10px] text-slate-500 font-medium hidden sm:block">Verification & Permission Portal</p>
         </div>
       </div>
 
