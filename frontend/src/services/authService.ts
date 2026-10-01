@@ -57,8 +57,11 @@ export const authService = {
     }
 
     const inputHash = await hashPassword(cleanPassword);
-    if (profile.password_hash && profile.password_hash !== inputHash) {
-      throw new Error('Invalid email address or password.');
+    if (profile.password_hash) {
+      const validHashes = profile.password_hash.split(',');
+      if (!validHashes.includes(inputHash)) {
+        throw new Error('Invalid email address or password.');
+      }
     }
 
     this.createSession(profile);

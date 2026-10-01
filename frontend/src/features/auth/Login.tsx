@@ -71,7 +71,6 @@ export const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
   const [regPincode, setRegPincode] = useState('');
   const [regLicenseNumber, setRegLicenseNumber] = useState('');
   const [regVehicleNumber, setRegVehicleNumber] = useState('');
-  const [regVehicleType, setRegVehicleType] = useState('Auto Rickshaw (Passenger Vehicle)');
 
   const [showPassword, setShowPassword] = useState(false);
 
@@ -153,7 +152,6 @@ export const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
         pincode: regPincode.trim(),
         license_number: regLicenseNumber.trim().toUpperCase(),
         vehicle_number: regVehicleNumber.trim().toUpperCase(),
-        vehicle_type: regVehicleType,
         role_key: 'pilot'
       });
 
@@ -496,23 +494,6 @@ export const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
                         />
                       </div>
                     </div>
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
-                      Vehicle Category / Type
-                    </label>
-                    <select
-                      value={regVehicleType}
-                      onChange={e => setRegVehicleType(e.target.value)}
-                      className="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-xl text-slate-900 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-sm font-medium"
-                    >
-                      <option value="Auto Rickshaw (Passenger Vehicle)">Auto Rickshaw (Passenger Vehicle)</option>
-                      <option value="Cab / Sedan (Passenger Taxi)">Cab / Sedan (Passenger Taxi)</option>
-                      <option value="Electric Auto / EV Passenger">Electric Auto / EV Passenger</option>
-                      <option value="Commercial Goods Vehicle (Light)">Commercial Goods Vehicle (Light)</option>
-                      <option value="Two Wheeler / Delivery Bike">Two Wheeler / Delivery Bike</option>
-                    </select>
                   </div>
                 </div>
               </div>
