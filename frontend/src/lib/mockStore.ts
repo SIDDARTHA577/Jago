@@ -222,7 +222,16 @@ class MockStore {
       if (auditStr) this.auditLogs = JSON.parse(auditStr);
 
       const profStr = localStorage.getItem('JAGO_STORE_PROFILES');
-      if (profStr) this.profiles = JSON.parse(profStr);
+      if (profStr) {
+        const loadedProfiles: Profile[] = JSON.parse(profStr);
+        this.profiles = loadedProfiles.map(p => {
+          const seed = INITIAL_PROFILES.find(ip => ip.email.toLowerCase() === p.email.toLowerCase());
+          return {
+            ...p,
+            password_hash: p.password_hash || seed?.password_hash || '7cb8f3ce3c9817e59d0faa1f16a0ac250421c0952aa25ea8050c2c38e43d7c78'
+          };
+        });
+      }
 
       const dtStr = localStorage.getItem('JAGO_STORE_DOC_TYPES');
       if (dtStr) this.documentTypes = JSON.parse(dtStr);
